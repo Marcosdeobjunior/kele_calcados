@@ -1,0 +1,14 @@
+{
+  "name": "Kele Calçados",
+  "short_name": "Kele",
+  "description": "Vitrine da Kele Calçados com pedido pelo WhatsApp.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#17140f",
+  "theme_color": "#17140f",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
