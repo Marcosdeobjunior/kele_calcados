@@ -54,6 +54,17 @@ Sem `VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` o app roda sozinho: o catálogo
 
 ## Publicação
 
+### GitHub Pages (visualização)
+
+O workflow `.github/workflows/pages.yml` compila e publica o app a cada push na `main`, em modo demonstração
+(sem Supabase), em `https://<usuario>.github.io/kele_calcados/`. Configuração única no GitHub:
+*Settings → Pages → Build and deployment → Source* = **GitHub Actions**.
+
+O build usa `BASE_PATH=/kele_calcados/` para o subcaminho e copia `index.html` para `404.html`, assim links
+diretos (ex.: `/kele_calcados/produto/atlas`) também abrem o app.
+
+### Outros serviços
+
 `npm run build` gera um site estático em `dist/`. Como as rotas são do lado do cliente, o servidor precisa
 devolver `index.html` para qualquer caminho — já incluído para Netlify (`public/_redirects`) e Vercel (`vercel.json`).
 
