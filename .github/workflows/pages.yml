@@ -1,3 +1,4 @@
+# Deploy do app (Vite) para o GitHub Pages.
 # Publica o app no GitHub Pages a cada push na main (modo demonstração, sem Supabase).
 # Requer: Settings → Pages → Build and deployment → Source = "GitHub Actions".
 name: Deploy GitHub Pages
