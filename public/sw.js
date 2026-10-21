@@ -1,9 +1,11 @@
 // Service worker mínimo: guarda o "app shell" para abrir offline.
 // Requisições para outras origens (Supabase, fontes, wa.me) não passam por aqui.
-const CACHE = 'kele-v1';
+const CACHE = 'kele-v2';
+// Raiz onde o app foi publicado ("/" ou, no GitHub Pages, "/kele_calcados/").
+const ROOT = self.registration.scope;
 
 self.addEventListener('install', (e) => {
-  e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['/', '/manifest.webmanifest', '/icon.svg'])));
+  e.waitUntil(caches.open(CACHE).then((c) => c.addAll([ROOT, ROOT + 'manifest.webmanifest', ROOT + 'icon.svg'])));
   self.skipWaiting();
 });
 
@@ -23,6 +25,6 @@ self.addEventListener('fetch', (e) => {
         caches.open(CACHE).then((c) => c.put(e.request, copy));
         return res;
       })
-      .catch(() => caches.match(e.request).then((r) => r || caches.match('/'))),
+      .catch(() => caches.match(e.request).then((r) => r || caches.match(ROOT))),
   );
 });
