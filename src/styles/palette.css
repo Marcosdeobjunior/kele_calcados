@@ -1,0 +1,49 @@
+/* Paletas do app, sobrescrevendo os tokens do design system Classical.
+   Regra visual: dourado é traço (bordas, sublinhados, numerais), nunca bloco preenchido. */
+
+/* Noir & ouro (padrão) */
+:root {
+  --color-bg: #17140f;
+  --color-surface: #241e17;
+  --color-text: #efe7d8;
+  --color-accent: #c9a25a;
+  --color-accent-100: #2a2218;
+  --color-accent-200: #3a2f1f;
+  --color-accent-400: #b08a45;
+  --color-accent-600: #d8b46c;
+  --color-accent-700: #dcbd80;
+  --color-accent-800: #e8d09c;
+  --color-divider: rgba(239, 231, 216, 0.14);
+  --color-neutral-100: #1f1a14;
+  --color-neutral-400: #6b6256;
+  --color-neutral-700: #a89c8a;
+  --color-neutral-800: #cfc4b2;
+  --color-neutral-900: #0a0908;
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 18px 44px rgba(0, 0, 0, 0.35);
+  --sel-bg: color-mix(in srgb, var(--color-accent) 12%, transparent);
+  color-scheme: dark;
+}
+
+/* Marfim */
+:root[data-palette='marfim'] {
+  --color-bg: #f6f1e7;
+  --color-surface: #ebe2d1;
+  --color-text: #1c1712;
+  --color-accent: #9c7a3c;
+  --color-accent-100: #f1e6cf;
+  --color-accent-200: #e6d6b4;
+  --color-accent-400: #b8955a;
+  --color-accent-600: #84652e;
+  --color-accent-700: #6e5222;
+  --color-accent-800: #4f3a17;
+  --color-divider: rgba(28, 23, 18, 0.14);
+  --color-neutral-100: #efe8da;
+  --color-neutral-400: #b3a895;
+  --color-neutral-700: #6f6557;
+  --color-neutral-800: #3f382f;
+  --color-neutral-900: #1a1612;
+  --shadow-md: 0 3px 10px rgba(40, 30, 15, 0.14);
+  --shadow-lg: 0 14px 36px rgba(40, 30, 15, 0.2);
+  color-scheme: light;
+}
