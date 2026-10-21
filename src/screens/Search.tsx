@@ -17,7 +17,7 @@ export function Search() {
 
   return (
     <div className="screen">
-      <div className="header" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div className="header m-only" style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div className="title">Buscar</div>
         <div style={{ position: 'relative' }}>
           <SearchIcon size={18} strokeWidth={1.5} color="var(--color-neutral-700)" style={{ position: 'absolute', left: 12, top: 13 }} />
@@ -34,6 +34,8 @@ export function Search() {
         </div>
       </div>
       <div className="scroll">
+        <div className="container narrow">
+        <div className="d-only title" style={{ padding: '28px 20px 0' }}>{has ? `Resultados para “${query.trim()}”` : 'Buscar'}</div>
         {!has ? (
           <div style={{ padding: 20 }}>
             <div className="kicker" style={{ marginBottom: 10 }}>Buscas frequentes</div>
@@ -73,6 +75,7 @@ export function Search() {
             )}
           </>
         )}
+        </div>
       </div>
     </div>
   );

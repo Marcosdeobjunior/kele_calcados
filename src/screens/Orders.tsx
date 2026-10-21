@@ -6,7 +6,7 @@ import { openWhatsApp } from '../lib/whatsapp';
 export function Orders() {
   const { orders } = useStore();
   return (
-    <div className="screen">
+    <div className="screen narrow-page">
       <div className="header title">Pedidos</div>
       <div className="scroll">
         {orders.length === 0 && (

@@ -32,12 +32,14 @@ function DepartmentView({ dept }: { dept: Dept }) {
 
   return (
     <div className="screen">
-      <div className="topbar" style={{ paddingBottom: 0 }}>
+      <div className="topbar m-only" style={{ paddingBottom: 0 }}>
         <BackButton />
         <div className="kicker">Departamento</div>
         <SearchButton />
       </div>
       <div className="scroll">
+        <div className="container">
+        <div className="d-only kicker" style={{ padding: '28px 20px 10px' }}>Departamento</div>
         <div style={{ padding: '6px 20px 0', position: 'relative' }}>
           <span
             aria-hidden
@@ -76,6 +78,7 @@ function DepartmentView({ dept }: { dept: Dept }) {
           <FilterButton count={countFilters(filters)} onClick={() => setSheet(true)} />
         </div>
         <ProductGrid products={list} kicker={(p) => p.type} onClear={clear} />
+        </div>
       </div>
       {sheet && (
         <FilterSheet filters={filters} onChange={setFilters} onClear={clear} onClose={() => setSheet(false)} resultCount={list.length} />

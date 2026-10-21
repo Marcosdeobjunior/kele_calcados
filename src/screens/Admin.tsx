@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { LogOut, Pencil, Plus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useStore } from '../state/store';
@@ -14,8 +14,8 @@ export function Admin() {
   const list = products.filter((p) => !nq || norm(`${p.name} ${p.dept} ${p.type}`).includes(nq));
 
   return (
-    <div className="screen">
-      <div style={{ flex: 'none', padding: '6px 14px 12px 20px', borderBottom: '1px solid var(--color-divider)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div className="screen narrow-page" style={{ "--page-w": "880px" } as CSSProperties}>
+      <div className="header" style={{ flex: 'none', padding: '6px 14px 12px 20px', borderBottom: '1px solid var(--color-divider)', display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>
             <div className="kicker" style={{ letterSpacing: '.14em' }}>Painel da dona</div>

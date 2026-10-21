@@ -81,13 +81,13 @@ function Editor({ initial, editId }: { initial: Draft; editId?: string }) {
   const pickBtn = <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} style={photoSlot}><Plus size={18} strokeWidth={1.5} />{uploading ? 'Enviando…' : 'Foto'}</button>;
 
   return (
-    <div className="screen">
+    <div className="screen narrow-page">
       <div className="topbar titled">
         <BackButton onClick={back} />
         <div className="title">{editId ? 'Editar produto' : 'Novo produto'}</div>
       </div>
       <div className="scroll" style={{ padding: '16px 20px 24px', display: 'flex', flexDirection: 'column', gap: 18 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+        <div className="photo-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
           <Plate photo={d.photos[0]} caption="foto principal" stripe={10} style={{ gridColumn: 'span 2', gridRow: 'span 2', aspectRatio: '1 / 1' }}>
             {d.photos[0] && <RemovePhoto onClick={() => patch({ photos: d.photos.slice(1) })} />}
           </Plate>

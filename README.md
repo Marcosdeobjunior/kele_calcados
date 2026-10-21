@@ -11,6 +11,10 @@ junto do protótipo HTML de referência.
 ## Stack
 
 - **Vite + React 19 + TypeScript**, web instalável (manifest + service worker).
+- **Responsivo**: no celular segue o design de 390pt (tab bar embaixo); no tablet as grades se alargam; a partir
+  de 900px (desktop) entra um cabeçalho com departamentos, busca, pedidos e sacola, a vitrine mostra mais colunas,
+  o produto fica em duas colunas, sacola e checkout ganham um resumo lateral fixo e os filtros abrem num painel
+  lateral.
 - **React Router** para as telas; **Lucide** para os ícones; fontes Cormorant Garamond + Lora (Google Fonts).
 - **Supabase** (Auth + Postgres + Storage) para login da dona, produtos e fotos — opcional no desenvolvimento.
 - Sacola e pedidos ficam no `localStorage` do aparelho da cliente.
@@ -63,7 +67,7 @@ src/
   lib/                 regras puras: filtros/busca, mensagem do pedido, WhatsApp, validação do cadastro (+ testes)
   services/            backend: Supabase ou local (modo demonstração)
   state/store.tsx      estado global (produtos, sacola, pedidos, sessão da dona, toast)
-  components/          Plate, grade de produtos, tab bar, filtros, toast, botões
+  components/          Plate, grade de produtos, tab bar, cabeçalho do desktop, filtros, toast, botões
   screens/             Vitrine, Departamento, Buscar, Produto, Sacola, Checkout, Enviado, Pedidos,
                        Login, Painel, Novo/Editar produto
   styles/              classical.css (design system), palette.css (Noir & ouro / Marfim), app.css

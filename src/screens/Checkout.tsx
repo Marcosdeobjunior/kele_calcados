@@ -9,6 +9,7 @@ import { buildMessage, cartTotal, missingFields, orderId, orderSummary, required
 import { maskCep } from '../lib/format';
 import { openWhatsApp, waDisplay } from '../lib/whatsapp';
 import { BackButton } from '../components/Buttons';
+import { useIsDesktop } from '../lib/useIsDesktop';
 
 type FieldDef = [key: keyof CheckoutForm, label: string, placeholder: string, span: number, mode: 'text' | 'numeric'];
 
@@ -28,6 +29,7 @@ export function Checkout() {
   const [tried, setTried] = useState(false);
   // Depois do envio a sacola esvazia antes da troca de rota; não redirecionar para a sacola nesse meio-tempo.
   const sent = useRef(false);
+  const desktop = useIsDesktop();
   const delivery: DeliveryMode = PICKUP_ENABLED ? storedDelivery : 'entrega';
 
   if (!lines.length) return sent.current ? null : <Navigate to="/sacola" replace />;
@@ -49,13 +51,23 @@ export function Checkout() {
     navigate('/pedido/enviado', { replace: true, state: { id } });
   };
 
+  const sendButton = (
+    <button className="btn btn-primary cta" onClick={send} style={desktop ? { marginTop: 20 } : undefined}>
+      <MessageCircle size={18} strokeWidth={1.5} />Enviar pedido no WhatsApp
+    </button>
+  );
+
   return (
     <div className="screen">
       <div className="topbar titled">
-        <BackButton fallback="/sacola" />
-        <div className="title">Dados do pedido</div>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          <BackButton fallback="/sacola" />
+          <div className="title">Dados do pedido</div>
+        </div>
       </div>
-      <div className="scroll" style={{ padding: '16px 20px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div className="scroll">
+      <div className="container split">
+      <div style={{ padding: '16px 20px 24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
         <p style={{ margin: 0, fontSize: 13, lineHeight: 1.6, color: 'var(--color-neutral-800)', textAlign: 'justify' }}>
           Vamos montar a mensagem para a loja. Frete e pagamento são confirmados por lá.
         </p>
@@ -94,7 +106,9 @@ export function Checkout() {
             ))}
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 6 }}>
+      </div>
+      <div className="split-aside" style={{ padding: '16px 20px 24px', alignSelf: 'start' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <div className="kicker">Prévia da mensagem</div>
           <div
             className="tnum"
@@ -107,12 +121,11 @@ export function Checkout() {
           </div>
           <div className="muted tnum" style={{ fontSize: 11, textAlign: 'right' }}>para Kele Calçados · {waDisplay()}</div>
         </div>
+        {desktop && sendButton}
       </div>
-      <div className="footer-cta">
-        <button className="btn btn-primary cta" onClick={send}>
-          <MessageCircle size={18} strokeWidth={1.5} />Enviar pedido no WhatsApp
-        </button>
       </div>
+      </div>
+      {!desktop && <div className="footer-cta">{sendButton}</div>}
     </div>
   );
 }

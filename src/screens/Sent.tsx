@@ -18,7 +18,7 @@ export function Sent() {
   if (!order) return <Navigate to="/pedidos" replace />;
 
   return (
-    <div className="screen scroll" style={{ padding: '40px 28px calc(28px + env(safe-area-inset-bottom))', alignItems: 'center', textAlign: 'center', gap: 12 }}>
+    <div className="screen scroll narrow-page" style={{ padding: '40px 28px calc(28px + env(safe-area-inset-bottom))', alignItems: 'center', textAlign: 'center', gap: 12 }}>
       <div className="circle-icon" style={{ width: 72, height: 72, flex: 'none' }}><Check size={30} strokeWidth={1.4} /></div>
       <div className="kicker tnum" style={{ marginTop: 8 }}>Pedido {order.id} · {fmt(order.total)}</div>
       <h2 style={{ margin: 0, fontWeight: 400, fontSize: 34, lineHeight: 1.05, letterSpacing: 0 }}>Pedido enviado<br /><em>para a Kele</em></h2>

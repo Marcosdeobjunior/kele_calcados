@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type CSSProperties, type FormEvent } from 'react';
 import { Lock } from 'lucide-react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { DEMO_MODE } from '../config';
@@ -27,7 +27,7 @@ export function Login() {
   };
 
   return (
-    <div className="screen">
+    <div className="screen narrow-page" style={{ "--page-w": "440px" } as CSSProperties}>
       <div style={{ flex: 'none', padding: '2px 12px 0' }}><BackButton /></div>
       <form onSubmit={submit} className="scroll" style={{ padding: '36px 28px 28px', display: 'flex', flexDirection: 'column', gap: 18 }}>
         <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>

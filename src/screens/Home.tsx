@@ -25,7 +25,7 @@ export function Home() {
 
   return (
     <div className="screen">
-      <div style={{ flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 14px 10px 20px', borderBottom: '1px solid var(--color-divider)' }}>
+      <div className="m-only" style={{ flex: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '6px 14px 10px 20px', borderBottom: '1px solid var(--color-divider)' }}>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
           <span style={{ fontFamily: 'var(--font-heading)', fontSize: 28, fontWeight: 500 }}>Kele</span>
           <span style={{ fontSize: 10, letterSpacing: '.16em', textTransform: 'uppercase', color: 'var(--color-accent-700)' }}>Calçados</span>
@@ -38,13 +38,14 @@ export function Home() {
       </div>
 
       <div className="scroll">
+        <div className="container">
         {cat === 'Todos' && nFilters === 0 && (
-          <div style={{ padding: '18px 20px 4px' }}>
-            <Plate caption="foto · campanha família" stripe={10} style={{ height: 200 }} />
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: 12, marginTop: 14 }}>
+          <div className="hero" style={{ padding: '18px 20px 4px' }}>
+            <Plate caption="foto · campanha família" stripe={10} className="hero-plate" />
+            <div className="hero-copy">
               <div>
                 <div className="kicker">Nova coleção · 2026</div>
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: 29, lineHeight: 1.05, marginTop: 4 }}>
+                <div className="hero-title">
                   Um par para<br /><em>cada passo da casa</em>
                 </div>
               </div>
@@ -55,14 +56,14 @@ export function Home() {
 
         <div style={{ padding: '22px 20px 4px' }}>
           <div className="kicker" style={{ marginBottom: 10 }}>Departamentos</div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 10 }}>
+          <div className="dept-grid">
             {DEPT_NAMES.map((d) => (
               <button
                 key={d}
                 onClick={() => openDept(d)}
                 style={{ background: 'none', border: 0, padding: 0, cursor: 'pointer', font: 'inherit', color: 'var(--color-text)', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: 6 }}
               >
-                <Plate stripe={7} style={{ width: '100%', aspectRatio: '3 / 4' }}>
+                <Plate stripe={7} className="dept-plate">
                   <span className="tnum" style={{ position: 'absolute', left: 6, top: 4, fontFamily: 'var(--font-heading)', fontSize: 22, color: 'var(--color-accent)' }}>
                     {DEPTS[d].num}
                   </span>
@@ -113,6 +114,7 @@ export function Home() {
           >
             <Lock size={13} strokeWidth={1.6} />Área da loja
           </button>
+        </div>
         </div>
       </div>
 

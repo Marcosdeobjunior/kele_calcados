@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Pencil } from 'lucide-react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStore } from '../state/store';
+import { useIsDesktop } from '../lib/useIsDesktop';
 import { fmt } from '../lib/format';
 import { Plate } from '../components/Plate';
 import { BackButton, CartButton } from '../components/Buttons';
@@ -13,6 +14,8 @@ export function ProductDetail() {
   const [color, setColor] = useState(0);
   const [size, setSize] = useState<number | null>(null);
   const [sizeErr, setSizeErr] = useState(false);
+  const desktop = useIsDesktop();
+  const [photo, setPhoto] = useState(0);
   const p = products.find((x) => x.id === id);
 
   if (!p)
@@ -35,13 +38,26 @@ export function ProductDetail() {
 
   return (
     <div className="screen">
-      <div className="topbar">
+      <div className="topbar container">
         <BackButton />
         <div className="kicker">{p.dept} · {p.type}</div>
         <CartButton />
       </div>
-      <div className="scroll" style={{ padding: '0 20px 24px' }}>
-        <Plate photo={p.photos?.[0]} caption={`foto · ${p.name.toLowerCase()} · ${colorName}`} stripe={12} style={{ aspectRatio: '1 / 1' }} />
+      <div className="scroll">
+        <div className="container pd-layout">
+        <div className="pd-media">
+          <Plate photo={p.photos?.[photo] ?? p.photos?.[0]} caption={`foto · ${p.name.toLowerCase()} · ${colorName}`} stripe={12} style={{ aspectRatio: '1 / 1' }} />
+          {(p.photos?.length ?? 0) > 1 && (
+            <div className="pd-thumbs">
+              {p.photos!.map((src, i) => (
+                <button key={src} className="pd-thumb" aria-label={`Foto ${i + 1}`} aria-pressed={i === photo} onClick={() => setPhoto(i)}>
+                  <Plate photo={src} style={{ aspectRatio: '1 / 1' }} />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="pd-info">
         <h2 style={{ margin: '18px 0 0', fontWeight: 500, fontSize: 32, lineHeight: 1.05, letterSpacing: 0 }}>{p.name}</h2>
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 6, flexWrap: 'wrap' }}>
           <span className="tnum" style={{ fontSize: 18 }}>{fmt(p.price)}</span>
@@ -83,10 +99,15 @@ export function ProductDetail() {
         {sizeErr && <div className="err" style={{ marginTop: 8 }}>Escolha um tamanho para continuar.</div>}
         <div className="hairline" style={{ margin: '20px 0 14px' }} />
         <p style={{ margin: 0, fontSize: 14, lineHeight: 1.65, textAlign: 'justify', hyphens: 'auto' }} lang="pt-BR">{p.desc}</p>
+        {desktop && <button className="btn btn-primary cta" onClick={add} style={{ marginTop: 28 }}>Adicionar à sacola</button>}
+        </div>
+        </div>
       </div>
-      <div className="footer-cta" style={{ paddingBottom: 'calc(26px + env(safe-area-inset-bottom))' }}>
-        <button className="btn btn-primary cta" onClick={add}>Adicionar à sacola</button>
-      </div>
+      {!desktop && (
+        <div className="footer-cta" style={{ paddingBottom: 'calc(26px + env(safe-area-inset-bottom))' }}>
+          <button className="btn btn-primary cta" onClick={add}>Adicionar à sacola</button>
+        </div>
+      )}
     </div>
   );
 }

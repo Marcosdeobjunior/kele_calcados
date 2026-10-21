@@ -3,6 +3,8 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import { StoreProvider, useStore } from './state/store';
 import { TabBar } from './components/TabBar';
 import { Toast } from './components/Toast';
+import { DesktopHeader } from './components/DesktopHeader';
+import { useIsDesktop } from './lib/useIsDesktop';
 import { Home } from './screens/Home';
 import { Department } from './screens/Department';
 import { Search } from './screens/Search';
@@ -26,6 +28,7 @@ function RequireOwner({ children }: { children: ReactNode }) {
 function Shell() {
   const { pathname } = useLocation();
   const { dismissToast } = useStore();
+  const desktop = useIsDesktop();
   // O toast some ao trocar de tela; no painel ele acompanha a volta após salvar.
   useEffect(() => {
     if (!pathname.startsWith('/loja')) dismissToast();
@@ -33,6 +36,7 @@ function Shell() {
 
   return (
     <div className="app">
+      {desktop && <DesktopHeader />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/departamento/:slug" element={<Department />} />
@@ -48,7 +52,7 @@ function Shell() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <Toast />
-      {TAB_ROUTES.some((r) => r.test(pathname)) && <TabBar />}
+      {!desktop && TAB_ROUTES.some((r) => r.test(pathname)) && <TabBar />}
     </div>
   );
 }
